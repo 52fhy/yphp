@@ -12,13 +12,14 @@
 #docker ps -a | awk '{print $1}' |xargs docker rm
 
 cid=$(docker ps | grep 'phalcon-withext' | awk '{print $1}') 
-ip=$(/sbin/ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6 | awk '{print $2}' | tr -d "addr:"|tail -1)
+ip=$($(which ifconfig) -a|grep inet|grep -v 127.0.0.1|grep -v inet6 | awk '{print $2}' | tr -d "addr:"|tail -1)
 
 
 function init(){
 	docker run -d --restart=always --name ysphp  -p 80:80 \
 	 -v /work/:/work/  \
 	 -v "/work/yphp/php/etc/php.ini":/usr/local/php/etc/php.ini  \
+	 -v "/work/yphp/php/etc/php-fpm.d/www.conf":/usr/local/php/etc/php-fpm.d/www.conf  \
 	 -v "/work/yphp/nginx/conf/nginx.conf":/usr/local/nginx/conf/nginx.conf  \
 	 -v "/work/yphp/nginx/conf/vhost/":/usr/local/nginx/conf/vhost/  \
 	 -v "/work/yphp/nginx/logs/":/usr/local/nginx/logs/  \
