@@ -14,11 +14,11 @@
 
 Mac、Windows可以使用 `docker-machine` 部署docker，Ubuntu直接可以安装docker。
 
-准备工作：
-1、安装好docker环境，安装并配置好git。
-2、宿主机新建 `/work` 目录，Mac、Windows需要在Virtaul Box里配置共享文件夹 `/work` 到 虚拟机里面。`/work` 用于映射到容器里面。
-3、获取 [docker-images](https://github.com/52fhy/docker-images) 里的 php56-fpm-centos68-withext 和 php71-fpm-centos68-phalcon-withext 镜像。
-4、克隆 yphp 项目到 `/work` 目录。后续克隆自己的项目到 `/work/www/` 目录。
+准备工作：  
+1、安装好docker环境，安装并配置好git。  
+2、宿主机新建 `/work` 目录，Mac、Windows需要在Virtaul Box里配置共享文件夹 `/work` 到 虚拟机里面。`/work` 用于映射到容器里面。  
+3、获取 [docker-images](https://github.com/52fhy/docker-images) 里的 php56-fpm-centos68-withext 和 php71-fpm-centos68-phalcon-withext 镜像。  
+4、克隆 yphp 项目到 `/work` 目录。后续克隆自己的项目到 `/work/www/` 目录。  
 
 ## 快速部署php5+php7+nginx开发环境
 
@@ -57,14 +57,14 @@ CONTAINER ID        IMAGE                                     COMMAND           
 ```
 192.168.99.100  hello.cc hello56.cc hello71.cc  ysapi.cc
 ```
-如果你是使用docker-machine部署的docker，`192.168.99.100`是虚拟机`default`默认的IP，宿主机IP是`192.168.99.1`。我们需要借助虚拟机服务容器提供的服务。
-如果你是Ubuntu系统，那么可以直接运行docker服务，无需借助虚拟机，那么 hosts里直接写`127.0.0.1`即可。
+如果你是使用docker-machine部署的docker，`192.168.99.100`是虚拟机`default`默认的IP，宿主机IP是`192.168.99.1`。我们需要借助虚拟机服务容器提供的服务。  
+如果你是Ubuntu系统，那么可以直接运行docker服务，无需借助虚拟机，那么 hosts里直接写`127.0.0.1`即可。  
 
->使用docker-machine，流程是：宿主机运行虚拟机`default`，虚拟机提供docker环境。我们在虚拟机`default`运行容器，容器对虚拟机暴露端口。我们想要在宿主机访问容器里的访问，必须使用虚拟机`default`的IP才行。
+>使用docker-machine，流程是：宿主机运行虚拟机`default`，虚拟机提供docker环境。我们在虚拟机`default`运行容器，容器对虚拟机暴露端口。我们想要在宿主机访问容器里的访问，必须使用虚拟机`default`的IP才行。  
 
-这时候，我们访问 http://hello56.cc/ 可以看到返回的phpinfo信息。如果返回 nginx 404，请按照 http://www.cnblogs.com/52fhy/p/8468791.html 检查原因。
+这时候，我们访问 http://hello56.cc/ 可以看到返回的phpinfo信息。如果返回 nginx 404，请按照 http://www.cnblogs.com/52fhy/p/8468791.html 检查原因。  
 
-接下来需要配置php.ini扩展部分。
+接下来需要配置php.ini扩展部分。  
 因为我们使用 `/etc` 覆盖了容器内的 php 配置，所以需要重新配置 php.ini：
 ```
 extension=redis.so
